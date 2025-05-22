@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
     public function index()
     {
-        return view('pages/index');
+        return view('index');
+        // $user = Auth::user();
+        // $posts = posts::where('user_id', $user->id)->latest()->get();
+        // return view('pages.profile', compact('posts'));
     }
 
     public function get_posts()
@@ -21,12 +25,22 @@ class PostsController extends Controller
         return $posts;
     }
 
-    public function get_post_by_id($id)
-    {
+    public function get_post_by_id($id) {
         $post = posts::find($id);
         if (request()->wantsJson()) {
             return response()->json($post);
         }
         return $post;
     }
+
+    public function myPosts()
+    {
+        $user = Auth::user();
+
+        $posts = posts::where('user_id', $user->id)->latest()->get();
+
+        return view('pages.profile', compact('posts'));
+    }
+
+
 }

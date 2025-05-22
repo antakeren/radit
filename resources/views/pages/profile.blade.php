@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,9 +53,11 @@
 
         {{-- Posts user --}}
         <div class="space-y-4 px-6 pb-10">
-            @foreach ($posts as $post)
+            @forelse ($posts as $post)
                 <x-post :post="$post" />
-            @endforeach
+            @empty
+                <p class="text-center text-gray-500">You haven't written any posts yet.</p>
+            @endforelse
         </div>
     </div>
 

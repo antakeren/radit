@@ -1,4 +1,4 @@
-<?php
+{{-- <?php
     namespace App\View\Components;
     use App\Http\Controllers\PostsController;
 
@@ -54,4 +54,78 @@
         </div>
     @endforeach
 </body>
-</html>
+</html> --}}
+
+@props(['post'])
+{{-- 
+<div class="bg-white border-1 mx-auto max-w-[650px] w-[70%] p-5 relative border-gray-300 flex-shrink-0 flex-grow-0">
+    <div class="flex justify-between">
+        <div class="flex flex-row">
+            <div>
+                <img src="{{ asset('img/profile.png') }}" alt="Profile" class="max-w-[40px] max-h-[40px]">
+            </div>
+            <div class="px-4">
+                <h3 class="font-bold">{{ $post->user->username }}</h3>
+                <p class="text-sm text-justify">{{ $post->content }}</p>
+            </div>
+        </div>
+        <p class="text-xl cursor-pointer">&#x2022;&#x2022;&#x2022;</p>
+    </div>
+
+    <div>
+        <img src="{{ asset('img/car.jpg') }}" alt="Post Image" class="w-full max-w-2xs block mx-auto mt-3 rounded-lg" />
+    </div>
+
+    <div class="flex items-center justify-between mt-4 px-2">
+        <div class="flex items-center gap-1.5">
+            <img src="{{ asset('img/QuackIcon.png') }}" alt="Custom Icon" class="aspect-square h-7 w-7 cursor-pointer" />
+            <span class="text-gray-500 text-sm font-medium ml-1">22.5K</span>
+        </div>
+        <div class="flex items-center gap-4.5">
+            <span class="material-symbols-outlined text-2xl text-gray-700 cursor-pointer">mode_comment</span>
+            <span class="material-symbols-outlined text-2xl text-gray-700 cursor-pointer">bookmark</span>
+        </div>
+    </div>
+</div> --}}
+
+@if($post)
+    {{-- Single post display for profile --}}
+    <div class="bg-white border-1 mx-auto max-w-[650px] w-[70%] p-5 relative border-gray-300 flex-shrink-0 flex-grow-0">
+        <div class="flex justify-between">
+            <div class="flex flex-row">
+                <div>
+                    <img src="{{ asset('storage/' . $post->user->profile ?? 'img/profile.png') }}" 
+                         alt="Profile" 
+                         class="max-w-[40px] max-h-[40px]">
+                </div>
+                <div class="px-4">
+                    <h3 class="font-bold">{{ $post->user->username }}</h3>
+                    <p class="text-sm text-justify">{{ $post->content }}</p>
+                </div>
+            </div>
+            <p class="text-xl cursor-pointer">•••</p>
+        </div>
+        {{-- Rest of your single post display code --}}
+    </div>
+@else
+    {{-- Display all posts --}}
+    @foreach($posts as $post)
+        <div class="bg-white border-1 mx-auto max-w-[650px] w-[70%] p-5 relative border-gray-300 flex-shrink-0 flex-grow-0">
+            <div class="flex justify-between">
+                <div class="flex flex-row">
+                    <div>
+                        <img src="{{ asset('storage/' . $post->user->profile ?? 'img/profile.png') }}" 
+                             alt="Profile" 
+                             class="max-w-[40px] max-h-[40px]">
+                    </div>
+                    <div class="px-4">
+                        <h3 class="font-bold">{{ $post->user->username }}</h3>
+                        <p class="text-sm text-justify">{{ $post->content }}</p>
+                    </div>
+                </div>
+                <p class="text-xl cursor-pointer">•••</p>
+            </div>
+            {{-- Rest of your post display code --}}
+        </div>
+    @endforeach
+@endif
