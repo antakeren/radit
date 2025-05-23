@@ -22,7 +22,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [SessionController::class, 'logout']);
     Route::get('/register/profile', [SessionController::class, 'showProfileForm']);
     Route::post('/register/profile/store', [SessionController::class, 'store']);
-    Route::get('/profile', [ProfilePostController::class, 'index'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });
 
 
@@ -32,9 +32,3 @@ Route::get('/', function () {
     }
     return redirect('/login');
 });
-// Route::get('/profile', function () {
-//     return view('pages.profile');
-// })->name('profile')->middleware('auth');
-
-// Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
-
