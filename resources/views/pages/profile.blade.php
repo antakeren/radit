@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,13 +49,17 @@
             <p class="mt-4 text-sm text-gray-500">Edit your bio here</p>
         </div>
 
-        {{-- Posts user --}}
         <div class="space-y-4 px-6 pb-10">
-            @forelse ($posts as $post)
-                <x-post :post="$post" />
-            @empty
-                <p class="text-center text-gray-500">You haven't written any posts yet.</p>
-            @endforelse
+            @if (isset($posts) && $posts->where('user_id', Auth::id())->count() > 0)
+                @foreach ($posts->where('user_id', Auth::id()) as $post)
+                    <x-post :post="$post" />
+                @endforeach
+            @else
+                <div
+                    class="bg-white border-1 mx-auto max-w-[650px] w-[70%] p-5 relative border-gray-300 flex-shrink-0 flex-grow-0">
+                    <p class="text-center text-gray-500">You haven't created any posts yet.</p>
+                </div>
+            @endif
         </div>
     </div>
 

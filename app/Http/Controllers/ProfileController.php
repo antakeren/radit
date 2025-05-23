@@ -12,13 +12,14 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $posts = posts::where('user_id', $user->id)
-                     ->latest()
-                     ->get();
 
-        return view('pages.profile', compact(
-            'posts',
-            'user'
-        ));
+        // Fetch posts for this user
+        $posts = posts::where('user_id', $user->id)
+            ->with('user')
+            ->latest()
+            ->get();
+
+        return view('pages.profile', compact('posts'));
     }
+
 }

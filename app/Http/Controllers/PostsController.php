@@ -25,22 +25,12 @@ class PostsController extends Controller
         return $posts;
     }
 
-    public function get_post_by_id($id) {
+    public function get_post_by_id($id)
+    {
         $post = posts::find($id);
         if (request()->wantsJson()) {
             return response()->json($post);
         }
         return $post;
     }
-
-    public function myPosts()
-    {
-        $user = Auth::user();
-
-        $posts = posts::where('user_id', $user->id)->latest()->get();
-
-        return view('pages.profile', compact('posts'));
-    }
-
-
 }

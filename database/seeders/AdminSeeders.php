@@ -29,6 +29,6 @@ class AdminSeeders extends Seeder
             'email' => 'admin@example.com',
             'email_verified_at' => now(),
         ]);
-        
+
     }
 }
